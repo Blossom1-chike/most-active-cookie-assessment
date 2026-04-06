@@ -11,17 +11,20 @@ all of them are returned.
 
 ```
 most-active-cookie/
+├── .github/
+│   └── workflows/
+│       └── ci.yml              # CI pipeline which runs tests on every push and PR
 ├── src/
 │   ├── most_active_cookie.py   # CLI entry point
 │   ├── log_parser.py           # CSV parsing
 │   └── analyzer.py             # Core logic (counting, finding most active)
 ├── tests/
-│   ├── test_analyzer.py
-│   └── test_parser.py
+│   ├── test_analyzer.py        # Unit tests for analyzer
+│   ├── test_parser.py          # Unit tests for log_parser
+│   └── test_integration.py     # End-to-end pipeline tests
 ├── cookie_log.csv              # Sample log file
 ├── pytest.ini                  # Test runner configuration
-├── requirements.txt            # Runtime dependencies
-├── requirements-dev.txt        # Development dependencies
+├── requirements.txt            # Dev dependencies (pytest)
 ├── .gitignore
 └── README.md
 ```
@@ -68,22 +71,27 @@ Run the full test suite using the command:
 pytest tests/
 ```
 
+## CI Pipeline
+This project uses GitHub Actions. On every push and pull request to main,
+the pipeline automatically installs dependencies and runs the full test suite.
+See .github/workflows/ci.yml for the configuration.
+
 ## Design Decisions
 
-**Separation of concerns** — the program is split into three distinct layers:
+**Separation of concerns**: the program is split into three distinct layers:
 parsing (`log_parser.py`), analysis (`analyzer.py`), and the CLI
 (`most_active_cookie.py`). Each layer can be changed or tested independently.
 
-**File object over filepath** — `parse_log` accepts a file-like object rather
+**File object over filepath**: `parse_log` accepts a file-like object rather
 than a filepath. This makes it flexible (works with real files, `StringIO`,
 or stdin) and keeps file handling concerns out of the parser.
 
-**Functions over classes** — the analyzer functions are stateless: they take
+**Functions over classes**: the analyzer functions are stateless meaning they take
 input and return output with no shared state. In Python, module-level functions
 are the cleaner choice in this case. A class would be appropriate if
 requirements grew to need shared state, such as keeping a log loaded in memory
 and running multiple queries against it.
 
-**Errors to stderr, results to stdout** — following Unix conventions, error
+**Errors to stderr, results to stdout**: following Unix conventions, error
 messages are written to `stderr` and the program exits with a non-zero status
 code on failure, making it composable with other shell tools.
