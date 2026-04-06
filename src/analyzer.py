@@ -17,6 +17,10 @@ def count_cookies_on_target_date(cookie_records: List[Tuple[str, str]], target_d
     for cookie, date in cookie_records:
         if date == target_date:
             counts[cookie] += 1
+        elif date < target_date:
+            # Since the file is sorted descending, once we go
+            # below our target date, there's nothing left to find
+            break
     return counts
 
 def find_most_active_cookies(counts: dict[str, int]) -> List[str]:

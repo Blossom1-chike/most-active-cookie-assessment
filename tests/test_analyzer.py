@@ -3,13 +3,9 @@ from src.analyzer import count_cookies_on_target_date, find_most_active_cookies
 """
     Unit tests for the analyzer module (count_cookies_on_target_date, find_most_active_cookies).
     
-    Each test is fully independent — data is defined locally per test,
+    Each test is fully independent, data is defined locally per test,
     never shared via module-level state. This ensures tests can run in
     any order and produce consistent results.
-    
-    Naming convention: test_<function>_<scenario>
-    Long descriptive names are intentional — they serve as documentation
-    and make failures immediately understandable without reading the body.
 """
 
 class TestCountCookies:

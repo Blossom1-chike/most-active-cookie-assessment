@@ -8,10 +8,6 @@ from src.log_parser import parse_csv_log
     Each test is fully independent, input is constructed inline using
     StringIO, so no real files, no shared state, and no cleanup needed.
     Tests can run in any order and will always produce consistent results.
-    
-    Naming convention: test_<function>_<scenario>
-    Long descriptive names are intentional because they serve as documentation
-    and make failures immediately understandable without reading the body.
 """
 
 # Helper function

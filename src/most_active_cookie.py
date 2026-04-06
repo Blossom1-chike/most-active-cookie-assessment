@@ -1,8 +1,8 @@
 import argparse
 import sys
 
-from src.analyzer import count_cookies_on_target_date, find_most_active_cookies
-from src.log_parser import parse_csv_log
+from analyzer import count_cookies_on_target_date, find_most_active_cookies
+from log_parser import parse_csv_log
 
 def main():
     """
