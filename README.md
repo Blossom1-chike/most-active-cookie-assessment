@@ -1,5 +1,7 @@
 # Most Active Cookie
 
+[![CI](https://github.com/Blossom1-chike/most-active-cookie-assessment/actions/workflows/ci.yml/badge.svg)](https://github.com/Blossom1-chike/most-active-cookie-assessment/actions/workflows/ci.yml)
+
 A command line program that processes a cookie log file and returns the most
 active cookie(s) for a given date.
 
@@ -68,7 +70,7 @@ Note: If multiple cookies tie for most active, each is printed on a separate lin
 Run the full test suite using the command:
 
 ```bash
-pytest tests/
+pytest tests/ -v
 ```
 
 ## CI Pipeline
